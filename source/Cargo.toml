@@ -1,0 +1,22 @@
+[package]
+name = "os"
+version = "0.1.0"
+edition = "2021"
+
+[toolchain]
+channel = "nightly"
+
+[dependencies]
+volatile = "0.2.6"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+[build]
+target = "x86_64-hola_mundo_os.json"
+
+[target.x86_64-unknown-none]
+rustflags = ["-C", "link-arg=-Tlinker.ld"]
