@@ -1,0 +1,26 @@
+#![no_std]
+#![no_main]
+
+use core::panic::PanicInfo;
+#[cfg(not(test))]
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
+
+const VGA_BUFFER: *mut u8 = 0xb8000 as *mut u8;
+const VGA_COLOR: u8 = 0x0F; // Color
+
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
+    let hello = b"Hello, World!";
+
+    for i in 0..hello.len() {
+        unsafe {
+            *VGA_BUFFER.offset(i as isize * 2) = byte;
+            *VGA_BUFFER.offset(i as isize * 2 + 1) = VGA_COLOR;
+        }
+    }
+
+    loop {}
+}

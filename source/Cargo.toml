@@ -1,22 +1,13 @@
 [package]
-name = "os"
+name = "mini_os"
 version = "0.1.0"
-edition = "2021"
-
-[toolchain]
-channel = "nightly"
+edition = "2018"
 
 [dependencies]
-volatile = "0.2.6"
+bootloader = "0.9"
 
 [profile.dev]
-panic = "abort"
+panic = "abort" # disable stack unwinding on panic
 
 [profile.release]
-panic = "abort"
-
-[build]
-target = "x86_64-hola_mundo_os.json"
-
-[target.x86_64-unknown-none]
-rustflags = ["-C", "link-arg=-Tlinker.ld"]
+panic = "abort" # disable stack unwinding on panic
